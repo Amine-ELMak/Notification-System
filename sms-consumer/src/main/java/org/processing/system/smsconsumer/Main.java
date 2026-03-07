@@ -1,4 +1,4 @@
-package org.processing.smsconsumer;
+package org.processing.system.smsconsumer;
 
 public class Main {
     public static void main(String[] args) {

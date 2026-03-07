@@ -1,4 +1,4 @@
-package org.processing.smsconsumer.model;
+package org.processing.system.smsconsumer.model;
 
 
 import lombok.Data;
