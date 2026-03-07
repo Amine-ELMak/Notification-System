@@ -40,12 +40,7 @@ public class NotificationService {
         event.setMessage(request.getMessage());
         event.setCreatedAt(LocalDateTime.now());
 
-        // MDC = Mapped Diagnostic Context. A thread-local key-value store that
-        // Logback automatically includes in every log line produced by this thread.
-        // This means every log line below will include eventId, userId, channel
-        // without us passing them explicitly to every log.info() call.
-        // We clear it before the async send because whenComplete() may run on a
-        // different thread where this MDC context doesn't exist.
+
         MDC.put("eventId", event.getEventId());
         MDC.put("userId", event.getUserId());
         MDC.put("channel", event.getChannel());
@@ -55,12 +50,7 @@ public class NotificationService {
 
         MDC.clear();
 
-        // send() is non-blocking — it returns immediately and the actual network call
-        // happens asynchronously. whenComplete() is the callback that fires when
-        // Kafka confirms receipt (or fails). This is why we log "Event published"
-        // after the fact, not immediately after calling send().
-        // Key = userId ensures all events for the same user go to the same partition,
-        // preserving message ordering per user.
+
         kafkaTemplate.send(topic, event.getUserId(), event)
                 .whenComplete((result, ex) -> {
                     if (ex != null) {
