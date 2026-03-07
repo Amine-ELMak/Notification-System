@@ -1,4 +1,4 @@
-package org.processing.notificationservice.model;
+package org.processing.system.notificationservice.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
