@@ -33,17 +33,15 @@ public class EmailConsumer {
         try {
 
             if (!"EMAIL".equals(event.getChannel())) {
-                log.debug("Skipping non-email event | eventId={} channel={}",
-                        event.getEventId(), event.getChannel());
+                log.debug("Skipping non-email event");
                 return;
             }
 
-            log.info("Processing email event | eventId={} recipient={}",
-                    event.getEventId(), event.getRecipient());
+            log.info("Processing email event | recipient={}", event.getRecipient());
 
             emailSender.send(event);
 
-            log.info("Email delivered successfully | eventId={}", event.getEventId());
+            log.info("Email delivered successfully");
 
         } finally {
             MDC.clear();

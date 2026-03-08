@@ -33,17 +33,15 @@ public class SmsConsumer {
         try {
 
             if (!"SMS".equals(event.getChannel())) {
-                log.debug("Skipping non-sms event | eventId={} channel={}",
-                        event.getEventId(), event.getChannel());
+                log.debug("Skipping non-sms event");
                 return;
             }
 
-            log.info("Processing sms event | eventId={} recipient={}",
-                    event.getEventId(), event.getRecipient());
+            log.info("Processing sms event | recipient={}", event.getRecipient());
 
             smsSender.send(event);
 
-            log.info("sms delivered successfully | eventId={}", event.getEventId());
+            log.info("sms delivered successfully");
 
         } finally {
             MDC.clear();

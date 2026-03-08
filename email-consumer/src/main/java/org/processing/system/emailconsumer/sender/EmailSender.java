@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
 public class EmailSender {
 
     public void send(NotificationEvent event) {
-        log.info("Sending email | to={} subject={} eventId={}",
-                event.getRecipient(), event.getSubject(), event.getEventId());
+        log.info("Sending email | to={} subject={}",
+                event.getRecipient(), event.getSubject());
 
         // to simulate failure and trigger the full retry + DLQ flow
         // throw new RuntimeException("SMTP connection timeout");
